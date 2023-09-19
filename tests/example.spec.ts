@@ -12,6 +12,15 @@ test.describe('My tests', () => {
     await expect(page).toHaveTitle(/Playwright/);
   });
 
+
+  test("has title, use loading options", async ({ page }) => {
+    await page.goto("http://playwright.dev/", {
+      waitUntil: "domcontentloaded",
+    });
+
+    await expect(page).toHaveTitle(/Playwright/);
+  })
+
   test("get started link", async ({ page }) => {
     await page.goto("https://playwright.dev/");
 

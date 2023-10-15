@@ -51,6 +51,23 @@ test.describe('My tests', () => {
     await expect(logo).toHaveAttribute("alt", "Browsers (Chromium, Firefox, WebKit)");
   });
 
+    test("test multiple elements in on assert", async ({ page }) => {
+      const expectedLinks = [
+        "Docs",
+        "API",
+        "Node.js",
+        "Community",
+        "",
+        "",
+      ];
+      
+      await page.goto("https://playwright.dev/");
+      const navLinks = page.locator("#__docusaurus .navbar .navbar__inner .navbar__items .navbar__link");
+      const navLinkTexts = await navLinks.allInnerTexts(); 
+      expect(navLinkTexts).toEqual(expectedLinks);
+    });
+
+
   test.afterAll(async () => {
     console.log("after tests");
   });

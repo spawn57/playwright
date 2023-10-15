@@ -44,6 +44,13 @@ test.describe('My tests', () => {
     await context.close();
   });
 
+  test("test to get browser image using locator", async ({ page }) => {
+    await page.goto("https://playwright.dev/");
+    const logo = page.locator("main div img").first();
+    await expect(logo).toBeVisible();
+    await expect(logo).toHaveAttribute("alt", "Browsers (Chromium, Firefox, WebKit)");
+  });
+
   test.afterAll(async () => {
     console.log("after tests");
   });
